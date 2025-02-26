@@ -91,6 +91,16 @@ final class NotionLink {
             $url = array_column( $this->pluginData, 'url', 'plugin' )[ $plugin_file ];
 
             $plugin_meta[] = '<a href="' . $url . '" target="_blank" style="display:block;margin:10px 0">' . notionIcon() . '</a>';
+            $link_and_icon = '<a href="' . $url . '" target="_blank" style="transform: translateY(5px);height: 21px;margin-left: 4px;display: inline-block;">' . notionIcon() . '</a>';
+
+            /**
+             * Filter the link and icon html right before it gets added to the plugin meta.
+             *
+             * @var string $link_and_icon
+             */
+            $link_and_icon = apply_filters( 'notionlink_link_html', $link_and_icon );
+
+            $plugin_meta[] = $link_and_icon;
         }
 
         return $plugin_meta;
