@@ -133,7 +133,8 @@ final class NotionLink {
             return [];
         }
 
-        $json = wp_remote_get( NOTIONLINK_ENDPOINT );
+        $args = apply_filters( 'notionlink_remote_request_args', [] );
+        $json = wp_remote_get( NOTIONLINK_ENDPOINT, $args );
 
         if ( is_wp_error( $json ) ) {
             return [];
