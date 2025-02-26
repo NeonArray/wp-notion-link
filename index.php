@@ -3,7 +3,7 @@
  * Plugin Name:       NotionLink
  * Plugin URI:        https://github.com/neonarray/wp-notion-link
  * Description:       Adds a link to a corresponding Notion page for each plugin that is assigned.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 5.2
  * Requires PHP:      7.4
  * Author:            Aaron Arney <2738518+NeonArray@users.noreply.github.com>
@@ -90,7 +90,6 @@ final class NotionLink {
         ) {
             $url = array_column( $this->pluginData, 'url', 'plugin' )[ $plugin_file ];
 
-            $plugin_meta[] = '<a href="' . $url . '" target="_blank" style="display:block;margin:10px 0">' . notionIcon() . '</a>';
             $link_and_icon = '<a href="' . $url . '" target="_blank" style="transform: translateY(5px);height: 21px;margin-left: 4px;display: inline-block;">' . notionIcon() . '</a>';
 
             /**
