@@ -1,0 +1,10 @@
+{
+    "name": "aarney/wp-autolink-notion",
+    "authors": [
+        {
+            "name": "Aaron Arney",
+            "email": "2738518+NeonArray@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

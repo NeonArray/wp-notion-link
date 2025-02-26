@@ -1,0 +1,11 @@
+{
+    "core": null,
+    "plugins": [
+        "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip",
+        "https://downloads.wordpress.org/plugin/autodescription.4.2.5.zip",
+        "."
+    ],
+    "port": 8001,
+    "phpVersion": "8.1",
+    "testsPort": 7001
+}

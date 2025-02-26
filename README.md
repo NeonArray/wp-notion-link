@@ -1,0 +1,32 @@
+# NotionLink
+
+This plugin adds a Notion icon next to every plugin on the plugins page that is registered so that a user can quickly
+and easily view any documentation on said plugin in Notion.
+
+This plugin is designed to read data from a remote server so that the plugin can be used across multiple websites while
+still pointing back to the same centralized pages. This JSON document simply contains a list of plugins with the
+corresponding Notion page URL's.
+
+## Configuration
+
+To set the remote URL for the JSON, simply add a constant in your `functions.php` or `wp-config.php` file.
+
+```php
+define( 'NOTIONLINK_ENDPOINT', 'https://someurl.com/data.json' );
+```
+
+## The Data
+
+The plugin expects a JSON structure like the following:
+
+```JSON
+[
+    {
+        "plugin": "advanced-custom-fields-pro/acf.php",
+        "url": "https://www.notion.so/link/to/the/page"
+    }
+]
+```
+
+The `plugin` property should be a qualified name of the plugin, not just the entrypoint file.
+
