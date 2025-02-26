@@ -37,7 +37,11 @@ The `plugin` property should be a qualified name of the plugin, not just the ent
 
 There are a few hooks available.
 
-`notionlink_plugin_data` - The raw data before it is cached. Data being the array of plugins and notion links, fetched from the web.
-`notionlink_notion_icon` - The svg icon.
-`notionlink_link_html` - The anchor and icon, right before it gets set to the plugin metadata.
-`notionlink_remote_request_args` - Add any args for the remote request, such as headers or tokens.
+
+| Hook | Description |
+|------|-------------|
+| `notionlink_plugin_data`          | The raw data before it is cached. Data being the array of plugins and notion links, fetched from the web. |
+| `notionlink_notion_icon`          | The svg icon. |
+| `notionlink_link_html`            | The anchor and icon, right before it gets set to the plugin metadata. |
+| `notionlink_remote_request_args`  | Add any args for the remote request, such as headers or tokens. |
+
