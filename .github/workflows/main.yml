@@ -22,9 +22,10 @@ jobs:
           echo "RELEASE_VERSION=${VERSION//v}" >> $GITHUB_ENV
 
       - name: Create artifact
-        uses: montudor/action-zip@v1
-        with:
-          args: mkdir -p build && zip -r build/${{ github.event.repository.name }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
+        id: package
+        run: |
+          mkdir -p build 
+          zip -X -r build/${{ github.event.repository.name }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
