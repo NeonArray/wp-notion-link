@@ -6,7 +6,6 @@ on:
     tags: [ 'v*' ]
 
 env:
-  PHP_VERSION: '7.4'
   ROOT_FOLDER: './'
 
 jobs:
