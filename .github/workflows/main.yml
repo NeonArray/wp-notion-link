@@ -37,3 +37,17 @@ jobs:
           fi
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: ${{ env.ROOT_FOLDER }}/dist/*.zip
+
+      - name: Create GitHub Release
+        if: env.TAG_NAME != ''
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          files: |
+            ${{ env.ROOT_FOLDER }}/dist/wp-autolink-notion-${{ env.TAG_NAME }}.zip
+
