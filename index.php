@@ -151,10 +151,10 @@ final class NotionLink {
              */
             $data = apply_filters( 'notionlink_plugin_data', $data );
 
-            // Only want to cache it if it exists and is valid - for 24 hours.
-            if ( ! empty( $data ) ) {
-                $this->setCache( $data );
+            if ( empty( $data ) ) {
+                return [];
             }
+
         }
 
         return $data;
