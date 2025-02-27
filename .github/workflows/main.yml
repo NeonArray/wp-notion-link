@@ -26,18 +26,11 @@ jobs:
         run: |
           mkdir -p build
           zip -X -r build/${{ github.event.repository.name }}.zip . \
-             .git/* \
-             bin/* \
-             node_modules/* \
-             .* \
-             "*/\.*" \
-              *.dist \
-             *.xml \
-             *.neon \
-             composer.lock \
-             package*.json \
-             tests/* \
-             build/*
+            -x .git/* \
+            -x .* \
+            -x composer.lock \
+            -x package*.json \
+            -x build/*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
