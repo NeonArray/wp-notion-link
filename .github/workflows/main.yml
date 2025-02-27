@@ -27,3 +27,13 @@ jobs:
       with:
         name: wp-autolink-notion-${{ github.run_id }}.zip
         path: ${{ env.ROOT_FOLDER }}/dist/wp-autolink-notion-${{ github.run_id }}.zip
+      - name: Get Git tag
+        id: get_tag
+        run: |
+          if [[ ${{ github.ref }} == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          else
+            TAG_NAME=""
+          fi
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
