@@ -24,7 +24,6 @@ jobs:
       - name: Create artifact
         id: package
         run: |
-          mkdir -p build 
           zip -X -r build/${{ github.event.repository.name }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
 
       - name: Upload artifact
