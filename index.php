@@ -155,6 +155,10 @@ final class NotionLink {
                 return [];
             }
 
+            foreach ( $data as $key => $value ) {
+                $data[ $key ]['plugin'] = sanitize_text_field( $value['plugin'] );
+                $data[ $key ]['url']    = esc_url_raw( $value['url'] );
+            }
         }
 
         return $data;
