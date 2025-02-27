@@ -3,9 +3,9 @@
  * Plugin Name:       NotionLink
  * Plugin URI:        https://github.com/neonarray/wp-notion-link
  * Description:       Adds a link to a corresponding Notion page for each plugin that is assigned.
- * Version:           1.1.1
+ * Version:           1.2.0
  * Requires at least: 5.2
- * Requires PHP:      7.4
+ * Requires PHP:      8.1
  * Author:            Aaron Arney <2738518+NeonArray@users.noreply.github.com>
  * Author URI:        https://github.com/neonarray
  */
