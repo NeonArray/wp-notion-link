@@ -13,20 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Create release archive
-      run: |
-        mkdir -p dist
-        zip -r dist/wp-autolink-notion-${{ github.run_id }}.zip . -x "**/.git/**"
-      working-directory: ${{ env.ROOT_FOLDER }}
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: wp-autolink-notion-${{ github.run_id }}.zip
-        path: ${{ env.ROOT_FOLDER }}/dist/wp-autolink-notion-${{ github.run_id }}.zip
       - name: Get Git tag
         id: get_tag
         run: |
@@ -36,6 +25,17 @@ jobs:
             TAG_NAME=""
           fi
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Create release archive
+        run: |
+          mkdir -p dist
+          if [ -n "${{ env.TAG_NAME }}" ]; then
+            FILENAME="wp-autolink-notion-${{ env.TAG_NAME }}.zip"
+          else
+            FILENAME="wp-autolink-notion-${{ github.run_id }}.zip"
+          fi
+          zip -r dist/wp-autolink-notion-${{ github.run_id }}.zip . -x "**/.git/**"
+        working-directory: ${{ env.ROOT_FOLDER }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
