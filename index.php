@@ -76,7 +76,7 @@ final class NotionLink {
     public function addNotionLinkToMeta( array $plugin_meta, string $plugin_file, array $plugin_data, string $status ): array {
 
         if ( empty( $this->pluginData ) ) {
-            return [];
+            return $plugin_meta;
         }
 
         if ( ! current_user_can( 'manage_options' ) ) {
