@@ -37,7 +37,6 @@ The `plugin` property should be a qualified name of the plugin, not just the ent
 
 There are a few hooks available.
 
-
 | Hook | Description |
 |------|-------------|
 | `notionlink_plugin_data`          | The raw data before it is cached. Data being the array of plugins and notion links, fetched from the web. |
