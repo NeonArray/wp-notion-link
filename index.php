@@ -159,6 +159,8 @@ final class NotionLink {
                 $data[ $key ]['plugin'] = sanitize_text_field( $value['plugin'] );
                 $data[ $key ]['url']    = esc_url_raw( $value['url'] );
             }
+
+            $this->setCache( $data );
         }
 
         return $data;
