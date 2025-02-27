@@ -19,7 +19,7 @@ jobs:
     - name: Create release archive
       run: |
         mkdir -p dist
-        zip -r dist/wp-autolink-notion-${{ github.run_id }}.zip .
+        zip -r dist/wp-autolink-notion-${{ github.run_id }}.zip . -x "**/.git/**"
       working-directory: ${{ env.ROOT_FOLDER }}
 
     - name: Upload artifact
