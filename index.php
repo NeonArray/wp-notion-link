@@ -41,15 +41,20 @@ final class NotionLink {
     public function __construct() {
         if ( ! defined( 'NOTIONLINK_ENDPOINT' ) ) {
             add_action( 'admin_notices', static function () {
+                if ( ! current_user_can( 'manage_options' ) ) {
+                    return;
+                }
+
                 $class   = 'notice notice-error';
-                $message = __( 'No endpoint URL has been set. Add a `define( "NOTIONLINK_ENDPOINT, "https://url.com/example" );` to your functions.php or wp-config.php file.', 'NotionLink' );
+                $message = __( 'NotionLink requires an endpoint URL. Please check your configuration.', 'NotionLink' );
                 printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
             } );
 
             return;
         }
 
-        if ( isset( $_GET['cacheBust'] ) ) {
+        if ( isset( $_GET['cacheBust'] ) && current_user_can( 'manage_options' ) ) {
+            check_admin_referer( 'notionlink_cache_bust' );
             delete_transient( self::KEY );
         }
 
@@ -62,6 +67,24 @@ final class NotionLink {
         }
 
         add_filter( 'plugin_row_meta', [ $this, 'addNotionLinkToMeta' ], 9999, 4 );
+        add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'addPluginActionLinks' ] );
+    }
+
+
+    /**
+     * @param array $links
+     *
+     * @return array
+     */
+    public function addPluginActionLinks( array $links ): array {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return $links;
+        }
+
+        $url = wp_nonce_url( admin_url( 'plugins.php?cacheBust=1' ), 'notionlink_cache_bust' );
+        $links[] = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $url ), __( 'Clear Cache', 'NotionLink' ) );
+
+        return $links;
     }
 
 
@@ -90,7 +113,7 @@ final class NotionLink {
         ) {
             $url = array_column( $this->pluginData, 'url', 'plugin' )[ $plugin_file ];
 
-            $link_and_icon = '<a href="' . $url . '" target="_blank" style="transform: translateY(5px);height: 21px;margin-left: 4px;display: inline-block;">' . notionIcon() . '</a>';
+            $link_and_icon = '<a href="' . esc_url( $url ) . '" target="_blank" style="transform: translateY(5px);height: 21px;margin-left: 4px;display: inline-block;">' . notionIcon() . '</a>';
 
             /**
              * Filter the link and icon html right before it gets added to the plugin meta.
@@ -201,6 +224,6 @@ function notionIcon(): string {
         ],
     );
 
-    return wp_kses( $filtered_icon, $allowed_tags );
+    return wp_kses( $icon, $allowed_tags );
 }
 
